@@ -137,7 +137,7 @@ h2.section-title em{font-style:italic;color:var(--accent);}
 .project-short{font-size:12.5px;color:var(--muted);line-height:1.75;margin-bottom:0.8rem;}
 /* Expandable content */
 .project-expand{max-height:0;overflow:hidden;opacity:0;transition:max-height 0.5s ease,opacity 0.35s ease;}
-.project-card.open 
+.project-card.open .project-expand{max-height:600px;opacity:1;}
 .expand-divider{height:1px;background:var(--border);margin:0.85rem 0;}
 .expand-label{font-size:9px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);margin-bottom:0.5rem;}
 .expand-desc{font-size:12.5px;color:var(--dark);line-height:1.8;margin-bottom:0.8rem;}
@@ -519,6 +519,12 @@ footer em{font-style:italic;color:var(--bg3);}
           <li>Upgraded chassis with improved motor control &amp; sensor placement</li>
         </ul>
         <span class="expand-badge">Sanji 1.0 evolved &mdash; IoT-first architecture</span>
+        <div style="margin-top:0.9rem;">
+          <a href="https://github.com/21Diya/Sanji-2.0" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();" style="display:inline-flex;align-items:center;gap:0.45rem;font-size:11.5px;font-weight:500;color:var(--bg);background:var(--dark2);border-radius:20px;padding:0.35rem 1rem;text-decoration:none;transition:opacity 0.2s;font-family:'Outfit',sans-serif;" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">
+            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.385-1.335-1.755-1.335-1.755-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12z"/></svg>
+            View on GitHub
+          </a>
+        </div>
       </div></div>
       <div class="exp-tags"><span class="tag">ESP8266</span><span class="tag">IoT</span><span class="tag">Mobile App</span><span class="tag">Real-Time Data</span></div>
       <button class="project-like-btn" onclick="handleLike(event,this,'Sanji 2.0')"><span class="like-heart">🤍</span> Like</button>
@@ -663,7 +669,7 @@ footer em{font-style:italic;color:var(--bg3);}
     <div class="contact-big">Let&rsquo;s build<br>something <em>real</em></div>
     <p class="contact-sub">Open to internships, collaborations, and creative projects &mdash; especially anything involving AI, data science, game development, or AR/VR. Say hello.</p>
     <div class="contact-links">
-  <a href="mailto:mdiyarajesh@gmail.com" class="contact-link">&#9993; mdiyarajesh@gmail.com</a>
+  <a href="/cdn-cgi/l/email-protection#026f666b7b6370636867716a42656f636b6e2c616d6f" class="contact-link">&#9993; <span class="__cf_email__" data-cfemail="365b525f4f5744575c53455e76515b575f5a1855595b">[email&#160;protected]</span></a>
   <a href="tel:+919443211334" class="contact-link">&#128222; +91 9443211334</a>
   <a href="https://www.linkedin.com/in/diya-michael21/" target="_blank" class="contact-link">&#128188; LinkedIn</a>
   <a href="https://github.com/21Diya" target="_blank" class="contact-link">&#128030; GitHub</a>
@@ -676,7 +682,7 @@ footer em{font-style:italic;color:var(--bg3);}
   <span>Built with <em>curiosity</em> &amp; lots of &#9749;</span>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 // Cursor
 const cursor=document.getElementById("cursor"),ring=document.getElementById("cursorRing");
 let mx=0,my=0,rx=0,ry=0;
@@ -779,6 +785,7 @@ const projectData = {
     tags: ["ESP8266", "IoT", "Mobile App", "Real-Time Data"],
     desc: "An upgraded healthcare robot with full IoT connectivity — live sensor data streams directly to a mobile app in real time, anywhere on the network.",
     badge: "Sanji 1.0 evolved — IoT-first architecture",
+    github: "https://github.com/21Diya/Sanji-2.0",
     features: [
       "Wi-Fi enabled via ESP8266 — data streams over local network",
       "Custom mobile app displays live temperature & heart rate graphs",
@@ -850,6 +857,14 @@ function openModal(projectName) {
   tagsEl.innerHTML = data.tags.map(t => `<span class="modal-tag">${t}</span>`).join("");
   const featuresEl = document.getElementById("modalFeatures");
   featuresEl.innerHTML = data.features.map(f => `<li>${f}</li>`).join("");
+  // Show GitHub button if project has a link
+  const ghBtn = document.getElementById("modalGithubBtn");
+  if (data.github) {
+    ghBtn.href = data.github;
+    ghBtn.style.display = "inline-flex";
+  } else {
+    ghBtn.style.display = "none";
+  }
   overlay.classList.add("active");
   document.body.style.overflow = "hidden";
 }
@@ -860,8 +875,10 @@ function closeModal() {
   document.body.style.overflow = "";
 }
 
-document.getElementById("projectModal").addEventListener("click", function(e) {
-  if (e.target === this) closeModal();
+document.addEventListener("DOMContentLoaded", function() {
+  document.getElementById("projectModal").addEventListener("click", function(e) {
+    if (e.target === this) closeModal();
+  });
 });
 document.addEventListener("keydown", function(e) {
   if (e.key === "Escape") closeModal();
@@ -885,13 +902,6 @@ document.addEventListener("keydown", function(e) {
       <div class="modal-section-label" style="margin-top:1.2rem;">Key Features</div>
       <ul class="modal-features" id="modalFeatures"></ul>
       <div class="modal-badge" id="modalBadge"></div>
-    </div>
-    <div class="modal-footer">
-      <div class="modal-like-row"><span class="modal-heart">❤️</span> You liked this project!</div>
-      <div class="modal-contact">Reach out: <a href="mailto:mdiyarajesh@gmail.com">mdiyarajesh@gmail.com</a></div>
-    </div>
-  </div>
-</div>
-
-</body>
-</html>
+      <div style="margin-top:1.1rem;">
+        <a id="modalGithubBtn" href="#" target="_blank" rel="noopener noreferrer" style="display:none;align-items:center;gap:0.45rem;font-size:12px;font-weight:500;color:var(--bg);background:var(--dark2);border-radius:20px;padding:0.4rem 1.1rem;text-decoration:none;transition:opacity 0.2s;font-family:'Outfit',sans-serif;" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">
+          <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.385-1.335-1.755-1.335-1.755-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5
